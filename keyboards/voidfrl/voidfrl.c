@@ -107,12 +107,12 @@ static uint8_t current_tap_frame = 0;
         }
 
     };
-    void print_wpm(void){
-        oled_set_cursor(0, 0);                            // sets cursor to (row, column) using charactar spacing (5 rows on 128x32 screen, anything more will overflow back to the top)
-        oled_write_P(PSTR("WPM: "), false);  // edit the string to change wwhat shows up, edit %03d to change how many digits show up
-        oled_write(get_u8_str(get_current_wpm(), ' '), false);                       // writes wpm on top left corner of string
+    // void print_wpm(void){
+    //     oled_set_cursor(oled_max_chars()-8, oled_max_lines()-2);                            // sets cursor to (row, column) using charactar spacing (5 rows on 128x32 screen, anything more will overflow back to the top)
+    //     oled_write_P(PSTR("WPM:"), false);  // edit the string to change wwhat shows up, edit %03d to change how many digits show up
+    //     oled_write(get_u8_str(get_current_wpm(), ' '), false);                       // writes wpm on top left corner of string
         
-    }
+    // }
 
     // void print_debug(void){
     //     oled_set_cursor(0, 0);                            // sets cursor to (row, column) using charactar spacing (5 rows on 128x32 screen, anything more will overflow back to the top)
@@ -123,7 +123,7 @@ static uint8_t current_tap_frame = 0;
 
     void caps_lock_print(void){
         led_t led_state = host_keyboard_led_state();  // caps lock stuff, prints CAPS on new line if caps led is on
-        oled_set_cursor(0, oled_max_lines()-1);
+        oled_set_cursor(oled_max_chars()-4, oled_max_lines()-1);
         oled_write_P(led_state.caps_lock ? PSTR("CAPS") : PSTR("       "), false);
     }
 
@@ -131,18 +131,16 @@ static uint8_t current_tap_frame = 0;
         
         if (get_current_wpm() <=IDLE_SPEED) {
             current_idle_frame = (current_idle_frame + 1) % IDLE_FRAMES;
-            if(ended == 1 && showokay<4){
+            if(ended == 1 && showokay<6){
                 showokay++;
                 oled_write_raw_P(prep[0], ANIM_SIZE);
                 caps_lock_print();
-                print_wpm();
             }
             else{
                 showokay=0;
                 ended=0;
                 oled_write_raw_P(idle[abs((IDLE_FRAMES-1)-current_idle_frame)], ANIM_SIZE);
                 caps_lock_print();
-                print_wpm();
             }
             
         }
@@ -152,7 +150,7 @@ static uint8_t current_tap_frame = 0;
                 oled_write_raw_P(prep[0], ANIM_SIZE);
                 caps_lock_print();
             }
-            print_wpm();
+            // print_wpm();
         }
 
         if (get_current_wpm() >=TAP_SPEED) {
@@ -160,7 +158,7 @@ static uint8_t current_tap_frame = 0;
             oled_write_raw_P(tap[abs((TAP_FRAMES-1)-current_tap_frame)], ANIM_SIZE);
             showokay=0;
             ended=1;
-            print_wpm();
+            // print_wpm();
             caps_lock_print();
             
         }
