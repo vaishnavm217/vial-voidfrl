@@ -15,12 +15,14 @@ jobs:
         fetch-depth: 0
     - name: Compile Void FRL
       run: |
+        git config --global --add safe.directory $(pwd)
+        make git-submodule
         make voidfrl:vial
     - name: Upload the generated hex file
       uses: actions/upload-artifact@v2
       with:
         name: hex_file
-        path: coseyfannitutti_mysterium_via.hex
+        path: voidfrl_vial.hex
     - name: Download the hex file
       uses: actions/download-artifact@v2
       with:
