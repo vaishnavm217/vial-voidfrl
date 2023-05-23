@@ -10,7 +10,7 @@
     },
     "encoder": {
       "rotary": [
-        {"pin_a": "C2", "pin_b": "C3", "resolution": 2}
+        {"pin_a": "C2", "pin_b": "C3", "resolution": 8}
       ]
     },
     "processor": "atmega32a",
