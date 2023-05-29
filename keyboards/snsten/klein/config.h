@@ -22,7 +22,7 @@
 #define MATRIX_ROWS 8 // Rows are doubled-up.
 #define MATRIX_COLS 5
 
-#define MASTER_RIGHT
+#define MASTER_LEFT
 #define SOFT_SERIAL_PIN D2
 
 #define AUDIO_PIN B5
