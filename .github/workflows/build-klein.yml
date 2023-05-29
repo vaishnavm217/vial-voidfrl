@@ -17,7 +17,7 @@ jobs:
       run: |
         git config --global --add safe.directory $(pwd)
         make git-submodule
-        make snsten/klein:vial.hex
+        make snsten/klein:vial
     - name: Upload the generated hex file
       uses: actions/upload-artifact@v2
       with:
